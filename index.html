@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Votify | Home</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/styles.css" />
+</head>
+<body data-page="home">
+  <div class="navbar-wrap">
+    <nav class="navbar container">
+      <a class="brand" href="index.html">Votify <small>Simple Polls</small></a>
+      <div class="nav-links" id="navbarLinks"></div>
+    </nav>
+  </div>
+
+  <main class="container">
+    <section class="hero">
+      <h1>Vote Fast. Learn Faster.</h1>
+      <p>Votify is a simple poll and voting interface for students and small teams. Browse public polls, cast votes, and track results live.</p>
+      <div class="card-actions">
+        <a href="register.html" class="btn">Create Account</a>
+        <a href="dashboard.html" class="btn secondary">Open Dashboard</a>
+      </div>
+    </section>
+
+    <section class="page-title">
+      <h2>Public Polls</h2>
+      <p>These polls are visible to everyone. Log in to vote and manage your own polls.</p>
+    </section>
+
+    <section class="grid cols-3" id="pollList"></section>
+  </main>
+
+  <footer class="container">Votify front-end with Supabase-backed data flow.</footer>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="assets/js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Votify | Edit Poll</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/styles.css" />
+</head>
+<body data-page="edit-poll">
+  <div class="navbar-wrap">
+    <nav class="navbar container">
+      <a class="brand" href="index.html">Votify <small>Simple Polls</small></a>
+      <div class="nav-links" id="navbarLinks"></div>
+    </nav>
+  </div>
+
+  <main class="container" id="editPollShell">
+    <section class="page-title">
+      <h1>Edit Poll</h1>
+      <p>Update your poll title, details, and options.</p>
+    </section>
+
+    <form id="editPollForm">
+      <div id="editPollNotice"></div>
+
+      <label for="title">Poll Title</label>
+      <input id="title" name="title" type="text" required />
+
+      <label for="description">Description or Question</label>
+      <textarea id="description" name="description" rows="4"></textarea>
+
+      <label>Voting Options</label>
+      <div id="optionsContainer" class="grid"></div>
+      <div class="card-actions">
+        <button id="addOptionBtn" type="button" class="btn secondary">Add Option</button>
+      </div>
+
+      <button class="btn" type="submit">Save Changes</button>
+    </form>
+  </main>
+
+  <footer class="container">Votify front-end prototype.</footer>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="assets/js/app.js"></script>
+</body>
+</html>
