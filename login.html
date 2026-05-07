@@ -3,52 +3,284 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Votify | Login</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="assets/css/styles.css" />
+  <title>Votify | Sign In</title>
+  
+  <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+  
+  <script src="https://unpkg.com/lucide@latest"></script>
+  
+  <style>
+    :root {
+      --bg-main: #0a0a0a;
+      --bg-card: #141414;
+      --bg-nav: rgba(10, 10, 10, 0.8);
+      --border-color: #262626;
+      --text-main: #f5f5f5;
+      --text-muted: #737373;
+      --brand-accent: #3ecf8e; 
+      --brand-hover: #34b27b;
+      --font-sans: 'Inter', sans-serif;
+    }
+
+    * { box-sizing: border-box; transition: all 0.2s ease; }
+
+    body {
+      background-color: var(--bg-main);
+      color: var(--text-main);
+      font-family: var(--font-sans);
+      margin: 0;
+      line-height: 1.6;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* --- NAVBAR (Consistent) --- */
+    .navbar-wrap {
+      border-bottom: 1px solid var(--border-color);
+      background: var(--bg-nav);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 64px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 700;
+      font-size: 1.1rem;
+      text-decoration: none;
+      color: var(--text-main);
+    }
+
+    .brand i { color: var(--brand-accent); }
+
+    /* --- LOGIN LAYOUT --- */
+    main {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 60px 24px;
+    }
+
+    .auth-card {
+      width: 100%;
+      max-width: 420px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 40px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+    }
+
+    .auth-header {
+      text-align: center;
+      margin-bottom: 32px;
+    }
+
+    .auth-header h1 {
+      font-size: 1.75rem;
+      font-weight: 700;
+      letter-spacing: -0.04em;
+      margin: 0 0 8px 0;
+    }
+
+    .auth-header p {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      margin: 0;
+    }
+
+    /* --- FORM STYLES --- */
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    label {
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--text-main);
+    }
+
+    input {
+      background: #0a0a0a;
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      padding: 12px 16px;
+      color: white;
+      font-family: inherit;
+      font-size: 0.95rem;
+    }
+
+    input:focus {
+      outline: none;
+      border-color: var(--brand-accent);
+      box-shadow: 0 0 0 2px rgba(62, 207, 142, 0.1);
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      background: var(--brand-accent);
+      color: #000;
+      padding: 12px;
+      border-radius: 6px;
+      font-weight: 600;
+      text-decoration: none;
+      cursor: pointer;
+      border: none;
+      font-size: 0.95rem;
+    }
+
+    .btn:hover { background: var(--brand-hover); }
+
+    .btn-secondary {
+      background: transparent;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      margin-top: 16px;
+      text-align: center;
+      display: block;
+    }
+
+    .btn-secondary:hover { color: var(--text-main); }
+
+    .demo-box {
+      margin-top: 32px;
+      padding: 16px;
+      background: rgba(255,255,255,0.03);
+      border: 1px dashed var(--border-color);
+      border-radius: 8px;
+    }
+
+    .demo-box p {
+      margin: 0;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      font-family: monospace;
+    }
+
+    /* --- FOOTER (Consistent) --- */
+    .footer {
+      border-top: 1px solid var(--border-color);
+      padding: 40px 0;
+      background: #050505;
+    }
+
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .status-indicator {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .dot {
+      width: 8px;
+      height: 8px;
+      background: var(--brand-accent);
+      border-radius: 50%;
+      box-shadow: 0 0 10px var(--brand-accent);
+    }
+  </style>
 </head>
 <body data-page="login">
+
   <div class="navbar-wrap">
     <nav class="navbar container">
-      <a class="brand" href="index.html">Votify <small>Simple Polls</small></a>
-      <div class="nav-links" id="navbarLinks"></div>
+      <a class="brand" href="index.html">
+        <i data-lucide="vote"></i>
+        Votify
+      </a>
+      <a href="register.html" class="nav-link" style="color: var(--text-muted); text-decoration: none; font-size: 0.85rem;">Need an account?</a>
     </nav>
   </div>
 
-  <main class="container">
-    <section class="page-title">
-      <h1>Login</h1>
-      <p>Sign in to create, edit, and manage your polls.</p>
-    </section>
+  <main>
+    <div class="auth-card">
+      <div class="auth-header">
+        <h1>Welcome Back</h1>
+        <p>Enter your details to manage your polls.</p>
+      </div>
 
-    <div class="grid cols-2">
       <form id="loginForm">
         <div id="loginNotice"></div>
 
-        <label for="email">Email</label>
-        <input id="email" name="email" type="email" required />
+        <div class="form-group">
+          <label for="email">Email Address</label>
+          <input id="email" name="email" type="email" placeholder="name@company.com" required />
+        </div>
 
-        <label for="password">Password</label>
-        <input id="password" name="password" type="password" required />
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input id="password" name="password" type="password" placeholder="••••••••" required />
+        </div>
 
-        <button class="btn block" type="submit">Login</button>
+        <button class="btn" type="submit">
+          Sign In
+          <i data-lucide="log-in" size="18"></i>
+        </button>
       </form>
 
-      <article class="card">
-        <h2>New here?</h2>
-        <p>Create your account to start building polls and collecting votes.</p>
-        <div class="card-actions">
-          <a class="btn secondary" href="register.html">Go to Register</a>
-        </div>
-        <p class="meta">Demo account: demo@votify.app / demo1234</p>
-      </article>
+      <a href="register.html" class="btn-secondary">Don't have an account? Sign up</a>
+
+      <div class="demo-box">
+        <p style="color: var(--brand-accent); font-weight: bold; margin-bottom: 4px;">DEMO ACCESS</p>
+        <p>User: demo@votify.app</p>
+        <p>Pass: demo1234</p>
+      </div>
     </div>
   </main>
 
-  <footer class="container">Votify front-end prototype.</footer>
+  <footer class="footer">
+    <div class="container footer-bottom">
+      <div style="color: var(--text-muted); font-size: 0.85rem;">
+        &copy; 2026 Votify.
+      </div>
+      <div class="status-indicator">
+        <div class="dot"></div>
+        All systems operational
+      </div>
+    </div>
+  </footer>
+
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="assets/js/app.js"></script>
+  <script>
+    lucide.createIcons();
+  </script>
 </body>
 </html>
