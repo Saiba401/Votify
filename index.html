@@ -3,40 +3,359 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Votify | Home</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="assets/css/styles.css" />
+  <title>Votify | Real-time Decisions</title>
+  
+  <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+  
+  <script src="https://unpkg.com/lucide@latest"></script>
+  
+  <style>
+    :root {
+      --bg-main: #0a0a0a;
+      --bg-card: #141414;
+      --bg-nav: rgba(10, 10, 10, 0.8);
+      --border-color: #262626;
+      --text-main: #f5f5f5;
+      --text-muted: #737373;
+      --brand-accent: #3ecf8e; 
+      --brand-hover: #34b27b;
+      --font-sans: 'Inter', sans-serif;
+    }
+
+    * { box-sizing: border-box; transition: all 0.2s ease; }
+
+    body {
+      background-color: var(--bg-main);
+      color: var(--text-main);
+      font-family: var(--font-sans);
+      margin: 0;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* --- ENHANCED NAVIGATION (The part from your image) --- */
+    .navbar-wrap {
+      border-bottom: 1px solid var(--border-color);
+      background: var(--bg-nav);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 64px;
+    }
+
+    .nav-group {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 700;
+      font-size: 1.1rem;
+      text-decoration: none;
+      color: var(--text-main);
+      margin-right: 24px;
+    }
+
+    .brand i { color: var(--brand-accent); }
+
+    /* Replacing the purple links in your image with these styles */
+    .nav-link {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 500;
+      padding: 6px 12px;
+      border-radius: 6px;
+    }
+
+    .nav-link:hover {
+      color: var(--text-main);
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    /* --- HERO SECTION --- */
+    .hero {
+      padding: 120px 0 100px;
+      background: radial-gradient(circle at 50% -20%, #1e3a2f 0%, #0a0a0a 50%);
+    }
+
+    .hero-content {
+      max-width: 800px;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(62, 207, 142, 0.1);
+      color: var(--brand-accent);
+      padding: 4px 12px;
+      border-radius: 100px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      border: 1px solid rgba(62, 207, 142, 0.2);
+      margin-bottom: 24px;
+    }
+
+    .hero h1 {
+      font-size: 4.5rem;
+      font-weight: 800;
+      letter-spacing: -0.06em;
+      margin: 0 0 24px;
+      line-height: 0.9;
+    }
+
+    .hero p {
+      font-size: 1.25rem;
+      color: var(--text-muted);
+      margin-bottom: 40px;
+    }
+
+    /* --- BUTTONS --- */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--brand-accent);
+      color: #000;
+      padding: 12px 24px;
+      border-radius: 6px;
+      font-weight: 600;
+      text-decoration: none;
+      font-size: 0.9rem;
+    }
+
+    .btn:hover { background: var(--brand-hover); transform: translateY(-2px); }
+
+    .btn-secondary {
+      background: transparent;
+      color: var(--text-main);
+      border: 1px solid var(--border-color);
+      margin-left: 12px;
+    }
+
+    .btn-secondary:hover { background: var(--bg-card); }
+
+    /* --- GRID & CARDS --- */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+      gap: 24px;
+      padding: 60px 0;
+    }
+
+    .card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 32px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card:hover { border-color: #444; }
+
+    /* --- ENHANCED FOOTER --- */
+    .footer {
+      border-top: 1px solid var(--border-color);
+      padding: 80px 0 40px;
+      margin-top: 100px;
+      background: #050505;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 40px;
+      margin-bottom: 80px;
+    }
+
+    .footer-title {
+      color: var(--text-main);
+      font-size: 0.85rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 24px;
+    }
+
+    .footer-links {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .footer-links li { margin-bottom: 12px; }
+
+    .footer-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.9rem;
+    }
+
+    .footer-links a:hover { color: var(--brand-accent); }
+
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 40px;
+      border-top: 1px solid var(--border-color);
+    }
+
+    .status-indicator {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .dot {
+      width: 8px;
+      height: 8px;
+      background: var(--brand-accent);
+      border-radius: 50%;
+      box-shadow: 0 0 10px var(--brand-accent);
+    }
+
+    @media (max-width: 768px) {
+      .hero h1 { font-size: 3rem; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
 </head>
-<body data-page="home">
+<body>
+
   <div class="navbar-wrap">
     <nav class="navbar container">
-      <a class="brand" href="index.html">Votify <small>Simple Polls</small></a>
-      <div class="nav-links" id="navbarLinks"></div>
+      <div class="nav-group">
+        <a class="brand" href="#">
+          <i data-lucide="layout-grid"></i>
+          Votify
+        </a>
+        <a href="#" class="nav-link">Features</a>
+        <a href="#" class="nav-link">Templates</a>
+        <a href="#" class="nav-link">Docs</a>
+      </div>
+      <div class="nav-group">
+        <a href="login.html" class="nav-link">Sign In</a>
+        <a href="register.html" class="btn" style="padding: 8px 16px;">Get Started</a>
+      </div>
     </nav>
   </div>
 
   <main class="container">
     <section class="hero">
-      <h1>Vote Fast. Learn Faster.</h1>
-      <p>Votify is a simple poll and voting interface for students and small teams. Browse public polls, cast votes, and track results live.</p>
-      <div class="card-actions">
-        <a href="register.html" class="btn">Create Account</a>
-        <a href="dashboard.html" class="btn secondary">Open Dashboard</a>
+      <div class="hero-content">
+        
+        <h1>Instant Polls.<br/>Decisive Teams.</h1>
+        <p>Gather feedback, run elections, or just pick where to eat lunch. Beautifully simple voting for modern organizations.</p>
+        <div>
+          <a href="#" class="btn">
+            Create your first poll
+            <i data-lucide="arrow-right" size="18"></i>
+          </a>
+          <a href="#" class="btn btn-secondary">Explore Public Polls</a>
+        </div>
       </div>
     </section>
 
-    <section class="page-title">
-      <h2>Public Polls</h2>
-      <p>These polls are visible to everyone. Log in to vote and manage your own polls.</p>
-    </section>
-
-    <section class="grid cols-3" id="pollList"></section>
+    <div class="grid" id="pollList">
+      <div class="card">
+        <div style="color: var(--brand-accent); margin-bottom: 20px;"><i data-lucide="zap"></i></div>
+        <h3 style="margin: 0 0 12px 0;">Real-time Results</h3>
+        <p style="color: var(--text-muted); font-size: 0.95rem; margin: 0;">Watch the charts update live as your team casts their votes. No page refreshes required.</p>
+      </div>
+      <div class="card">
+        <div style="color: var(--brand-accent); margin-bottom: 20px;"><i data-lucide="shield-check"></i></div>
+        <h3 style="margin: 0 0 12px 0;">Secure Voting</h3>
+        <p style="color: var(--text-muted); font-size: 0.95rem; margin: 0;">Prevent double-voting and ensure integrity with Supabase Auth and RLS policies.</p>
+      </div>
+      <div class="card">
+        <div style="color: var(--brand-accent); margin-bottom: 20px;"><i data-lucide="share-2"></i></div>
+        <h3 style="margin: 0 0 12px 0;">Instant Sharing</h3>
+        <p style="color: var(--text-muted); font-size: 0.95rem; margin: 0;">Generate secure links or QR codes to share your polls with anyone, anywhere.</p>
+      </div>
+    </div>
   </main>
 
-  <footer class="container">Votify front-end with Supabase-backed data flow.</footer>
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <a class="brand" href="#" style="margin-bottom: 20px;">
+            <i data-lucide="layout-grid"></i>
+            Votify
+          </a>
+          <p style="color: var(--text-muted); font-size: 0.9rem; max-width: 200px;">
+            Making collective decision-making effortless and beautiful.
+          </p>
+        </div>
+        <div>
+          <div class="footer-title">Product</div>
+          <ul class="footer-links">
+            <li><a href="#">Dashboard</a></li>
+            <li><a href="#">Public Polls</a></li>
+            <li><a href="#">Pro Version</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer-title">Company</div>
+          <ul class="footer-links">
+            <li><a href="#">About Us</a></li>
+            <li><a href="#">Careers</a></li>
+            <li><a href="#">Blog</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer-title">Legal</div>
+          <ul class="footer-links">
+            <li><a href="#">Privacy</a></li>
+            <li><a href="#">Terms</a></li>
+            <li><a href="#">Cookie Policy</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div style="color: var(--text-muted); font-size: 0.85rem;">
+          &copy; 2026 Votify. All rights reserved.
+        </div>
+        <div class="status-indicator">
+          <div class="dot"></div>
+          All systems operational
+        </div>
+        <div style="display:flex; gap: 20px;">
+          <a href="#" style="color: var(--text-muted)"><i data-lucide="github" size="18"></i></a>
+          <a href="#" style="color: var(--text-muted)"><i data-lucide="twitter" size="18"></i></a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script src="assets/js/app.js"></script>
+  <script>
+    // Initialize icons
+    lucide.createIcons();
+  </script>
 </body>
 </html>
